@@ -22,6 +22,11 @@ public class jdbcTest03 {
 		int num2 = scan.nextInt();
 		System.out.println();
 
+		
+//		int max =Math.max(num,num2);
+//		int min =Math.min(num,num2);
+//		int max = num>num2? num:num2;
+		
 		if (num > num2) {
 			int temp = num;
 			num = num2;
