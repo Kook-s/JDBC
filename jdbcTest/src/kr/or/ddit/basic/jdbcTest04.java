@@ -31,6 +31,8 @@ public class jdbcTest04 {
 			System.out.print("예즘주명 입력 >>");
 			String userName = scan.next();
 //
+//statement 이용		
+//			
 //			String sql = "insert into BANKINFO(BANK_NO,bank_name,bank_user_name,bank_date) " + "values( '" + bankNo
 //					+ "' , '" + bankName + "' , '" + userName + "' ,sysdate)";
 //
@@ -46,7 +48,8 @@ public class jdbcTest04 {
 //			int cnt = stmt.executeUpdate(sql);
 
 // -------------------------------------------------------------------------------------------
-
+//PreparedStatement이용
+			
 			// PreparedStatement객체를 이용하여 처리하기
 
 			// SQl문을 작성할 때 SQL문에서 데이터가 들어갈 자리를 물음표(?)표시하여 작성한다.
