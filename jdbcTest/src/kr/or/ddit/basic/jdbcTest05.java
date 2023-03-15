@@ -1,11 +1,11 @@
 package kr.or.ddit.basic;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.Scanner;
+
+import kr.or.ddit.basic.utill.DBUtil;
 
 /*
  * LPROD테이블에 새로운 데이터 추가하기 
@@ -27,8 +27,10 @@ public class jdbcTest05 {
 
 		try {
 
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "SHIN", "java");
+//			Class.forName("oracle.jdbc.driver.OracleDriver");
+//			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "SHIN", "java");
+
+			conn = DBUtil.getConnection();
 
 			String sql = "select max(lprod_id)+1 maxid from lprod";
 			pstmt = conn.prepareStatement(sql);
@@ -45,7 +47,7 @@ public class jdbcTest05 {
 
 			String lprodGu; // 상품 분류 코드
 			int count = 0; // 입력한 상품 분류 코드 갯수
-			
+
 			do {
 				System.out.print("상품 분류 코드(LPORD_GU) 입력 >> ");
 				lprodGu = scan.next();
@@ -54,39 +56,37 @@ public class jdbcTest05 {
 //				pstmt.close();
 				pstmt = conn.prepareStatement(sql2);
 				pstmt.setString(1, lprodGu);
-				
+
 				rs = pstmt.executeQuery();
-				
-				if(rs.next()) {
+
+				if (rs.next()) {
 					count = rs.getInt("cnt");
 				}
-				
-				if(count==1) {
-					System.out.println("입력한 상품 분류 코드 "+lprodGu
-							+"는(은) 이미 등록된 코드 입니다.");
+
+				if (count == 1) {
+					System.out.println("입력한 상품 분류 코드 " + lprodGu + "는(은) 이미 등록된 코드 입니다.");
 					System.out.println("다른 코드로 다시 입력하세요...");
 				}
 			} while (count == 1);
-			
+
 			System.out.print("상품 분류명 (LPROD_NM) 입력 >>");
 			String lprodNm = scan.next();
-			
-			String sql3 = "insert into lprod(lprod_id,lprod_gu,lprod_nm) "
-			               +"values(?,?,?)";
-			//경고뜨는 이유 >> 새로운 값으로 변경하니까 시스템 입장에서 잘못된게 
-			//아닌지 시스템이 사용자에게 물어보는것
-			//안뜨게 하려면 close()를 해주면 안뜬다. 근데 해도 되고 안해도된다고 나와있음
+
+			String sql3 = "insert into lprod(lprod_id,lprod_gu,lprod_nm) " + "values(?,?,?)";
+			// 경고뜨는 이유 >> 새로운 값으로 변경하니까 시스템 입장에서 잘못된게
+			// 아닌지 시스템이 사용자에게 물어보는것
+			// 안뜨게 하려면 close()를 해주면 안뜬다. 근데 해도 되고 안해도된다고 나와있음
 //			pstmt.close();
-			pstmt =conn.prepareStatement(sql3);
+			pstmt = conn.prepareStatement(sql3);
 			pstmt.setInt(1, lprodId);
 			pstmt.setString(2, lprodGu);
 			pstmt.setString(3, lprodNm);
-			
+
 			int cnt = pstmt.executeUpdate();
-			
-			if(cnt>0) {
+
+			if (cnt > 0) {
 				System.out.println("등록 성공!!!");
-			}else {
+			} else {
 				System.out.println("등록 실패~~~");
 			}
 
