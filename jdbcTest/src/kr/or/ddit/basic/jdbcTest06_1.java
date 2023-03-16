@@ -101,24 +101,20 @@ public class jdbcTest06_1 { //jdbcTest06 더 정리한거
 		switch (scan.nextInt()) {
 		case 1:
 			System.out.print("새로운 비밀번호 >> ");
-			input = scan.next();
 			sql += " mem_pass = ? where mem_id = ?";
 
 			break;
 		case 2:
 			System.out.print("새로운 회원이름>> ");
-			input = scan.next();
 			sql += " mem_name = ? where mem_id = ?";
 			break;
 		case 3:
 			System.out.print("새로운 전화번호 >> ");
-			input = scan.next();
 			sql += " mem_tel = ? where mem_id = ?";
 			break;
 		case 4:
 			scan.nextLine();// 버퍼 지우기
 			System.out.print("새로운 회원주소 >> ");
-			input = scan.nextLine();
 			sql += " mem_addr =? where mem_id = ?";
 			break;
 		default:
@@ -126,8 +122,8 @@ public class jdbcTest06_1 { //jdbcTest06 더 정리한거
 			break;
 		}
 		try {
+			scan.nextLine();
 			input = scan.nextLine();
-//			System.out.println(sql);
 			conn= DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, input);
