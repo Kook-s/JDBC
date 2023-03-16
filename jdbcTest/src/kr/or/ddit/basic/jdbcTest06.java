@@ -35,9 +35,9 @@ public class jdbcTest06 {
 
 	public static void main(String[] args) {
 
-		Scanner scan = new Scanner(System.in);
 		Connection conn = DBUtil.getConnection();
 		new jdbcTest06().start();
+		
 	}
 
 	public void insert(Connection conn) {
