@@ -94,36 +94,38 @@ public class jdbcTest06_1 { //jdbcTest06 더 정리한거
 		System.out.println("3.새로운 회원 전화번호");
 		System.out.println("4.새로운 회원 주소");
 		System.out.println("------------------------");
-		System.out.println("선택 >>");
+		System.out.print("선택 >>");
 		String sql = "update mymember set ";
 		String input = "";
 		
 		switch (scan.nextInt()) {
 		case 1:
 			System.out.print("새로운 비밀번호 >> ");
-			sql += " mem_pass = ? where mem_id = ?";
+			sql += " mem_pass = ? ";
 
 			break;
 		case 2:
 			System.out.print("새로운 회원이름>> ");
-			sql += " mem_name = ? where mem_id = ?";
+			sql += " mem_name = ? ";
 			break;
 		case 3:
 			System.out.print("새로운 전화번호 >> ");
-			sql += " mem_tel = ? where mem_id = ?";
+			sql += " mem_tel = ? ";
 			break;
 		case 4:
 			scan.nextLine();// 버퍼 지우기
 			System.out.print("새로운 회원주소 >> ");
-			sql += " mem_addr =? where mem_id = ?";
+			sql += " mem_addr =? ";
 			break;
 		default:
 			System.out.println("잘못 선택했습니다 다시 입력해주세요.");
 			break;
 		}
 		try {
+			sql+= " where mem_id = ?";
 			scan.nextLine();
 			input = scan.nextLine();
+			
 			conn= DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, input);
@@ -132,7 +134,7 @@ public class jdbcTest06_1 { //jdbcTest06 더 정리한거
 			int cnt = pstmt.executeUpdate();
 
 			if (cnt > 0) {
-				System.out.println("회원 ID가" + id + "인 회원정보 수정 성공!!!");
+				System.out.println("회원 ID가 " + id + "인 회원정보 수정 성공!!!");
 			}
 
 		} catch (Exception e) {
