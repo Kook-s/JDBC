@@ -48,8 +48,34 @@ public class MemberDaoimpl implements IMemberDao {
 
 	@Override
 	public int deleteMember(String memId) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int cnt = 0;
+		
+		try {
+			conn = DBUtil3.getConnection();
+			String sql = "delete from mymember where mem_id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memId);
+			cnt = pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+		}
+
+		return cnt;
 	}
 
 	@Override

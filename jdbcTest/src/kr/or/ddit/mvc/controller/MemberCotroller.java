@@ -6,8 +6,7 @@ import kr.or.ddit.mvc.service.IMemberService;
 import kr.or.ddit.mvc.service.MemberServiceimpl;
 import kr.or.ddit.mvc.vo.MemberVO;
 
-public class MemberCotroller 
-{
+public class MemberCotroller {
 	private Scanner scan;
 	private IMemberService service;// Service객체 변수 선언
 
@@ -30,9 +29,9 @@ public class MemberCotroller
 			case 1: // 추가
 				insertMember();
 				break;
-//			case 2: // 삭제
-//				deleteMember();
-//				break;
+			case 2: // 삭제
+				deleteMember();
+				break;
 //
 //			case 3: // 수정
 //				updateMember();
@@ -55,6 +54,28 @@ public class MemberCotroller
 				System.out.println("작업 번호를 잘못 입력했습니다. 다시 입력해 주세요");
 				break;
 			}
+		}
+
+	}
+
+	private void deleteMember() {
+		// TODO Auto-generated method stub
+		System.out.println();
+		System.out.println("삭제할 회원 정보를 입력하세요");
+		System.out.print("회원ID >> ");
+		String id = scan.next();
+		int cnt=0;
+		
+		cnt = service.deleteMember(id);
+		
+//		MemberVO memVo = new MemberVO();
+//		memVo.setMem_id(id);
+		
+	
+		if (cnt > 0) {
+			System.out.println("회원 ID가" + id + "인 회원 정보 삭제 성공!!!");
+		} else {
+			System.out.println(id + "회원은 없는 회원이거나 삭제 작업에 실패했습니다...");
 		}
 
 	}
@@ -84,7 +105,6 @@ public class MemberCotroller
 		System.out.print("회원주소 >> ");
 		String addr = scan.nextLine();
 
-		
 		// 입력이한 자료들 VO객체에 담는다.
 		MemberVO memVo = new MemberVO();
 		memVo.setMem_id(id);
@@ -92,9 +112,9 @@ public class MemberCotroller
 		memVo.setMem_name(name);
 		memVo.setMem_tel(tel);
 		memVo.setMem_addr(addr);
-		
+
 		int cnt = service.insertMember(memVo);
-		
+
 		if (cnt > 0) {
 			System.out.println(id + "회원 정보 추가 완료!!!");
 		} else {

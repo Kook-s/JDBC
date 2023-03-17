@@ -113,8 +113,8 @@ public class jdbcTest06 {
 		try {
 			String sql2 = "DELETE from MYMEMBER where MEM_ID =?";
 			System.out.print("삭제 할 아이디를 입력해 주세요 >>");
-			pstmt = conn.prepareStatement(sql2);
 			String memId = scan.next();
+			pstmt = conn.prepareStatement(sql2);
 			pstmt.setString(1, memId);
 
 			int cnt = pstmt.executeUpdate();

@@ -22,19 +22,19 @@ public class MemberServiceimpl implements IMemberService {
 	@Override
 	public int deleteMember(String memId) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.deleteMember(memId);
 	}
 
 	@Override
 	public int updateMember(MemberVO memVo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.updateMember(memVo);
 	}
 
 	@Override
 	public List<MemberVO> getAllMember() {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.getAllMember();
 	}
 
 	@Override
