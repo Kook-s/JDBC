@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 import kr.or.ddit.basic.utill.DBUtil;
+import kr.or.ddit.basic.utill.DBUtil2;
+import kr.or.ddit.basic.utill.DBUtil3;
 
 public class jdbcTest06_1 { // jdbcTest06 더 정리한거
 	private Connection conn = null;
@@ -98,7 +100,7 @@ public class jdbcTest06_1 { // jdbcTest06 더 정리한거
 
 		System.out.println();
 		scan.nextLine();
-		
+
 		System.out.print("새로운 비밀번호 >> ");
 		String newPass = scan.nextLine().trim();
 		if (!"".equals(newPass)) {
@@ -122,12 +124,12 @@ public class jdbcTest06_1 { // jdbcTest06 더 정리한거
 		if (!"".equals(newAddr)) {
 			dataMap.put("mem_addr", newAddr);
 		}
-		
+
 		try {
 			conn = DBUtil.getConnection();
 
 			String temp = ""; // SQL문의 set이후에 수정할 컬럼 설정하는 부누이 저장될 변수
-			// ? 안사용할때 
+			// ? 안사용할때
 //			for (String fieldName : dataMap.keySet()) {
 //				if (!"".equals(temp)) {
 //					temp += ", ";
@@ -139,7 +141,7 @@ public class jdbcTest06_1 { // jdbcTest06 더 정리한거
 //			pstmt = conn.prepareStatement(sql);
 //			pstmt.setString(1, id);
 
-			// ?사용일때 
+			// ?사용일때
 			for (String fieldName : dataMap.keySet()) {
 				if (!"".equals(temp)) {
 					temp += ", ";
@@ -315,7 +317,10 @@ public class jdbcTest06_1 { // jdbcTest06 더 정리한거
 		System.out.println("---------------------------------------------------------");
 
 		try {
-			conn = DBUtil.getConnection();
+			// 4번 전체보기만 dbutil 수정
+//			conn = DBUtil.getConnection();
+//			conn = DBUtil2.getConnection();
+			conn = DBUtil3.getConnection();
 			String sql = "select * from mymember";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
