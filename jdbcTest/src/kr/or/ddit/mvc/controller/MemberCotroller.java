@@ -6,7 +6,8 @@ import kr.or.ddit.mvc.service.IMemberService;
 import kr.or.ddit.mvc.service.MemberServiceimpl;
 import kr.or.ddit.mvc.vo.MemberVO;
 
-public class MemberCotroller {
+public class MemberCotroller 
+{
 	private Scanner scan;
 	private IMemberService service;// Service객체 변수 선언
 
