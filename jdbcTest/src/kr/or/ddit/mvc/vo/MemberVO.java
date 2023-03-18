@@ -17,8 +17,6 @@ public class MemberVO {
 	// VO클래스에서 별도의 생성자를 만들 때에는
 	// 기본 생성자도 반드시 같이 만들어 준다.
 
-	
-
 	public String getMem_id() {
 		return mem_id;
 	}
@@ -42,7 +40,7 @@ public class MemberVO {
 	public void setMem_name(String mem_name) {
 		this.mem_name = mem_name;
 	}
-	
+
 	public String getMem_tel() {
 		return mem_tel;
 	}
@@ -58,10 +56,10 @@ public class MemberVO {
 	public void setMem_addr(String mem_addr) {
 		this.mem_addr = mem_addr;
 	}
+
 	@Override
 	public String toString() {
-		return "MemberVO [mem_id=" + mem_id + ", mem_pass=" + mem_pass + ", mem_name=" + mem_name + ", mem_tel="
-				+ mem_tel + ", mem_addr=" + mem_addr + "]";
+		return mem_id + "\t" + mem_pass + "\t" + mem_name + "\t" + mem_tel + "\t" + mem_addr + "\n";
 	}
 
 }

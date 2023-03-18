@@ -3,6 +3,8 @@ package kr.or.ddit.mvc.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import kr.or.ddit.basic.utill.DBUtil;
@@ -51,7 +53,7 @@ public class MemberDaoimpl implements IMemberDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int cnt = 0;
-		
+
 		try {
 			conn = DBUtil3.getConnection();
 			String sql = "delete from mymember where mem_id = ?";
@@ -80,14 +82,60 @@ public class MemberDaoimpl implements IMemberDao {
 
 	@Override
 	public int updateMember(MemberVO memVo) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int cnt = 0;
+		try {
+			conn = DBUtil3.getConnection();
+			String sql = "update mymember set mem_pass = ?, mem_name=? , " + "mem_tel=? , mem_addr=? where mem_id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memVo.getMem_pass());
+			pstmt.setString(2, memVo.getMem_name());
+			pstmt.setString(3, memVo.getMem_tel());
+			pstmt.setString(4, memVo.getMem_addr());
+			pstmt.setString(5, memVo.getMem_id());
+
+			cnt = pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		return cnt;
 	}
 
 	@Override
 	public List<MemberVO> getAllMember() {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		List<MemberVO> list = new ArrayList<>();
+		int count = 0;
+		
+		try {
+			conn = DBUtil3.getConnection();
+			String sql = "select * from mymember";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				list.add(new MemberVO());
+				list.get(count).setMem_id(rs.getString("mem_id"));
+				list.get(count).setMem_pass(rs.getString("mem_pass"));
+				list.get(count).setMem_name(rs.getString("mem_name"));
+				list.get(count).setMem_tel(rs.getString("mem_tel"));
+				list.get(count).setMem_addr(rs.getString("mem_addr"));
+
+				count++;
+			}
+
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return list;
 	}
 
 	@Override
