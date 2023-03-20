@@ -8,7 +8,7 @@ import kr.or.ddit.mvc.service.MemberServiceimpl;
 import kr.or.ddit.mvc.vo.MemberVO;
 
 public class MemberCotroller {
-	String test = "";
+
 	private Scanner scan;
 	private IMemberService service;// Service객체 변수 선언
 
