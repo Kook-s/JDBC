@@ -10,8 +10,17 @@ public class MemberServiceimpl implements IMemberService {
 	// 일을 시킬 DAO객체 변수 선언
 	private IMemberDao dao;
 
-	public MemberServiceimpl() {
-		dao = new MemberDaoimpl(); // DAO객체 생성
+	private static MemberServiceimpl service;
+
+	private MemberServiceimpl() {
+//		dao = new MemberDaoimpl(); // DAO객체 생성
+		dao = MemberDaoimpl.getInstance();
+	}
+
+	public static MemberServiceimpl getInstance() {
+		if (service == null)
+			service = new MemberServiceimpl();
+		return service;
 	}
 
 	@Override
@@ -42,4 +51,13 @@ public class MemberServiceimpl implements IMemberService {
 		return dao.getMemberCount(memId);
 	}
 
+	public int updateMember2(MemberVO memVo) {
+		// TODO Auto-generated method stub
+		return dao.updateMember2(memVo);
+	}
+
+	public int updateMember3(MemberVO memVo) {
+		// TODO Auto-generated method stub
+		return dao.updateMember3(memVo);
+	}
 }
