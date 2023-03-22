@@ -8,6 +8,7 @@ import java.sql.Statement;
 
 //JDBC(Java DataBace Connectivity) 라이브러리를 이용한 DB자료 처리하기 
 public class jdbcTest01 {
+	//깃 테스트 
 	/*
 	 * JDBC를 이용한 DB처리 순서 1. 드라이버 로딩 >> 라이브러리를 사용할 수 있게 메모리로 읽어 들이는 작업
 	 * >> JDBC API버전 4이상에서 getConnection()메서드에서 자동으로 로딩헤 주기 때무에
